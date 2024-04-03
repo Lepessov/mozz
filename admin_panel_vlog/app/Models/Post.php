@@ -11,9 +11,9 @@ class Post extends Model
 
     protected $fillable = ['title', 'content', 'category_id', 'visibility', 'user_id'];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function user()
