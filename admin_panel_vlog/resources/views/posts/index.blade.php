@@ -45,6 +45,9 @@
     </style>
 </head>
 <body>
+<div>
+    <a href="{{ route('posts.create') }}" class="btn btn-primary">Create Post</a>
+</div>
 
 @foreach ($posts as $post)
     <div class="card mb-3">
