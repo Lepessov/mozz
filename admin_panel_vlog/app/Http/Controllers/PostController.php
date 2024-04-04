@@ -12,12 +12,19 @@ class PostController extends Controller
 {
     public function __construct()
     {
-//        $this->authorizeResource(Post::class, 'post');
+        $this->authorizeResource(Post::class, 'post');
+    }
+
+    public function showAll()
+    {
+        $posts = Post::paginate(2);
+
+        return view('posts.all', compact('posts'));
     }
 
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::where('visibility', 'PUBLIC')->paginate(2);
         return view('posts.index', compact('posts'));
     }
 
@@ -44,7 +51,7 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->content = $request->input('content');
         $post->visibility = $request->input('visibility');
-        $post->user_id = 2;
+        $post->user_id = auth()->id();
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('uploads/posts', 'public');
@@ -58,19 +65,13 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id);
         return view('posts.show', compact('post'));
     }
 
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $user = User::findOrFail(3);
-
-//        dd($user->isModerator(), $user->id);
-        $post = Post::findOrFail($id);
-
         if (Gate::denies('update-post', $post)) {
             abort(403);
         }
@@ -80,10 +81,8 @@ class PostController extends Controller
         return view('posts.edit', compact('post', 'categories', 'visibilityOptions'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        $post = Post::findOrFail($id);
-
         if (Gate::denies('update-post', $post)) {
             abort(403);
         }
@@ -111,10 +110,8 @@ class PostController extends Controller
         return redirect()->route('posts.show', $post->id)->with('success', 'Post updated successfully');
     }
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
-
         if (Gate::denies('delete-post')) {
             abort(403);
         }

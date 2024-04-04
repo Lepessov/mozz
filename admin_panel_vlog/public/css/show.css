@@ -1,0 +1,36 @@
+/* Add this CSS to your existing stylesheet or create a new one */
+
+.container {
+    margin-top: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+.categories {
+    margin-top: 10px;
+}
+
+.categories strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+.btn-primary {
+    margin-right: 10px;
+}
+
