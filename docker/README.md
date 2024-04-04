@@ -1,30 +1,27 @@
 Docker & docker-compose
-Manual module work wiki
-.env for docker cp .env-example .env
-change TENDER_API_PATH variable in .env to your full path to project
 
-docker-compose build
-docker-compose ps
-docker-compose up -d
+После того как стянули проект на свой компьютер, укажите путь к своему ларавел проекту в .env (APP_PATH=) файле в docker/.env дополнительно можете там настроить порт и тд
 
-
-Check http://127.0.0.1:8090
-If you need artisan use docker-compose exec php-fpm bash
-
-Installation from script.
-
-Services:
-
-counterparty_api
-ru_counterparty_api
+Пропишите эти команды в папке докера где docker-compose.yml файл:
+`docker-compose build`
+`docker-compose ps`
+`docker-compose up -d`
 
 
-Running
-Just exec
+Проверьте по адрессу http://127.0.0.1:8080 или http://localhost:8080
+Убедитесь, что все работает
 
-sudo sh install.sh SERVICE_NAME
+Если, необходимо зайти в контейнер, то пропишите: docker-compose exec php-fpm bash
 
+В .env.dvelopment настроить базу данных (указать порты и тд)
 
+Потом активировать скрипт который активирует каомманды внутри контейнера
 
-sudo sh install.sh counterparty_api
-sudo sh install.sh ru_counterparty_api
+`sudo sh install-app.sh`
+
+(Необязательно)
+
+Makefile есть короткие комманды для управления контейнером
+
+Синткасис:
+`make <command_name>`

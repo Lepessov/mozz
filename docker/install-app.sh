@@ -6,3 +6,4 @@ sudo docker-compose exec -T php-fpm composer update --lock
 sudo docker-compose exec -T php-fpm php artisan optimize:clear
 sudo docker-compose exec -T php-fpm php artisan key:generate
 sudo docker-compose exec -T php-fpm php artisan config:cache
+sudo docker-compose exec -T php-fpm php artisan migrate
