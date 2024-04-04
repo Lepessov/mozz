@@ -9,7 +9,6 @@ networks:
                  - subnet: "172.50.0.0/16"
 
 services:
-
   postgres:
     image: postgres:13.3
     environment:
