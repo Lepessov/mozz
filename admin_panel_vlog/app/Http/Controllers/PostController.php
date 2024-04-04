@@ -10,21 +10,16 @@ use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Post::class, 'post');
-    }
-
     public function showAll()
     {
-        $posts = Post::paginate(2);
+        $posts = Post::paginate(10);
 
         return view('posts.all', compact('posts'));
     }
 
     public function index()
     {
-        $posts = Post::where('visibility', 'PUBLIC')->paginate(2);
+        $posts = Post::where('visibility', 'PUBLIC')->paginate(10);
         return view('posts.index', compact('posts'));
     }
 
